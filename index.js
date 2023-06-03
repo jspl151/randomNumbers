@@ -1,10 +1,9 @@
+const getRandomNo = require('./randomno.js')
+
 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 const hex = '0123456789abcdef';
 const hexLength = hex.length;
-
-const getRandomNo = (min, max) => Math.floor(Math.random() * (max - min) + min);
-
 
 const getRandomCharacter = () => {
   const charLength = chars.length;
@@ -16,7 +15,7 @@ const getRandomCharacter = () => {
 
 const getRandomString = (length) => {
   let randomString = '';
-  for (i = 0; i < length; i++)
+  for (let i = 0; i < length; i++)
     randomString += getRandomCharacter();
 
   return randomString;
@@ -24,7 +23,7 @@ const getRandomString = (length) => {
 
 const getRandomHex = (length) => {
   let randomHex = '';
-  for (i = 0; i < length; i++)
+  for ( let i = 0; i < length; i++)
     randomHex += hex.charAt(getRandomNo(1, hexLength + 1));
 
   return randomHex;
@@ -32,8 +31,8 @@ const getRandomHex = (length) => {
 
 const getUUID = (length) => {
   let randomHex = '';
-  for (i = 0; i < length; i++)
-    randomHex += getRandomHex(length);
+  for ( let i = 0; i < length; i++)
+    randomHex = getRandomHex(length);
 
   return randomHex;
 }
