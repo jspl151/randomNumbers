@@ -1,17 +1,14 @@
-const getRandomNo = require('./randomno.js')
+const getRandomNo = require('./randomNo.js')
 
 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const charLength = chars.length;
 
 const hex = '0123456789abcdef';
 const hexLength = hex.length;
 
-const getRandomCharacter = () => {
-  const charLength = chars.length;
-  let result = '';
-  result = chars.charAt(getRandomNo(1, charLength + 1));
+const uuidPartLengths = [8, 4, 4, 4, 12];
 
-  return result;
-}
+const getRandomCharacter = () => chars.charAt(getRandomNo(1, charLength + 1));
 
 const getRandomString = (length) => {
   let randomString = '';
@@ -23,18 +20,20 @@ const getRandomString = (length) => {
 
 const getRandomHex = (length) => {
   let randomHex = '';
-  for ( let i = 0; i < length; i++)
+  for (let i = 0; i < length; i++)
     randomHex += hex.charAt(getRandomNo(1, hexLength + 1));
 
   return randomHex;
 }
 
-const getUUID = (length) => {
-  let randomHex = '';
-  for ( let i = 0; i < length; i++)
-    randomHex = getRandomHex(length);
+const getUUID = () => {
+  let uuid = uuidPartLengths.map((uuidLength) => {
+    for (let i = 0; i < uuidLength; i++)
 
-  return randomHex;
+      return getRandomHex(uuidLength);
+  });
+
+  return uuid.join('-');
 }
 
 const main = () => {
@@ -42,9 +41,7 @@ const main = () => {
   console.log(getRandomCharacter());
   console.log(getRandomString(4));
   console.log(getRandomHex(4));
-  const uuidLength = [8, 4, 4, 4, 12];
-  const uuid = uuidLength.map(getUUID);
-  console.log(uuid.join('-'));
+  console.log(getUUID());
 
 };
 
