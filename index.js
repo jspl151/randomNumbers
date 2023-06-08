@@ -12,32 +12,19 @@ const uuidPartLengths = [8, 4, 4, 4, 12];
 
 const getRandomCharacter = () => chars.charAt(getRandomNo(1, charLength + 1));
 
-const getRandomStringReduce = (length) =>{
-const stringLength=range(0,length);
-const randomStringReduce = reduce(stringLength,(acc,cur) => acc+getRandomCharacter(),'')
+const getRandomStringReduce = (length) =>
+reduce(range(0,length),(acc,cur) => acc+getRandomCharacter(),'');
   
-  return randomStringReduce;
-}
+const getRandomHex = (length) => reduce(range(0,length),(acc,cur) => acc + hex.charAt(getRandomNo(1, hexLength + 1)),'');
 
-const getRandomHex = (length) => {
-const stringLength=range(0,length);
-const randomHexReduce = reduce(stringLength,(acc,cur) => acc + hex.charAt(getRandomNo(1, hexLength + 1)),'');
-
-  return randomHexReduce;
-}
-
-const getUUIDMap = () => {
-const uuid = map(uuidPartLengths,length =>
-       getRandomHex(length));
-
-  return uuid.join('-');
-    }
+const getUUIDMap = () => map(uuidPartLengths,length =>
+       getRandomHex(length)).join('-');
 
 const main = () => {
   console.log(getRandomNo(0, 15));
   console.log(getRandomCharacter());
   console.log(getRandomHex(4));
-   console.log(getRandomStringReduce(5));
+  console.log(getRandomStringReduce(5));
   console.log(getUUIDMap());
 
 };
